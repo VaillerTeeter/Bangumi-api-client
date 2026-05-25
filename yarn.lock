@@ -56,14 +56,14 @@
     "@types/json-schema" "7.0.15"
     js-yaml "4.1.1"
 
-"@hey-api/openapi-ts@^0.97.1":
-  version "0.97.1"
-  resolved "https://registry.yarnpkg.com/@hey-api/openapi-ts/-/openapi-ts-0.97.1.tgz#e29980ab1c29a96f26959b912801f3927dbf0a91"
-  integrity sha512-LksUJeXAqwf6OhcCCr3/B4YjnBs5rqSqjDUKMBvkgp4OhaCQiJrOvntctFxdnugy8jUojP4yi/eJf5xYzcYzCQ==
+"@hey-api/openapi-ts@^0.97.2":
+  version "0.97.2"
+  resolved "https://registry.yarnpkg.com/@hey-api/openapi-ts/-/openapi-ts-0.97.2.tgz#c2093319a9dca6e0cb55cb8445c2f983d995427a"
+  integrity sha512-nA+y0/I5O9loQMeJKumi6BQ40/Y71N0hIMmXZ/I7rh8jEOzYxSxmf5a4TBEI2Ap4RAfZyh7RJzJfVzT98KUYQQ==
   dependencies:
     "@hey-api/codegen-core" "0.8.1"
     "@hey-api/json-schema-ref-parser" "1.4.2"
-    "@hey-api/shared" "0.4.3"
+    "@hey-api/shared" "0.4.4"
     "@hey-api/spec-types" "0.2.0"
     "@hey-api/types" "0.1.4"
     "@lukeed/ms" "2.0.2"
@@ -72,10 +72,10 @@
     commander "14.0.3"
     get-tsconfig "4.14.0"
 
-"@hey-api/shared@0.4.3":
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/@hey-api/shared/-/shared-0.4.3.tgz#0b7002d8602adac037dec11e2a2b27f977808549"
-  integrity sha512-3tHfZNXgGOt+3P3Kq9cvqmZ9i7e3jtrkip1uDpZTX1+hTNboHhYdjxnT8AbrDuvslTaQHoAOlP4/iCDdzd9Jag==
+"@hey-api/shared@0.4.4":
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/@hey-api/shared/-/shared-0.4.4.tgz#7c57c83e6813c7f9ae7adb496fcd8b04d2d3f775"
+  integrity sha512-UZgaQNEdo/OSGLeNXhSv0VQTHQQm5Q2mHOuoYhFPJkNvLVrz7KZtGdKR8O4QPrhyblshxY+caJli08WKM0gREg==
   dependencies:
     "@hey-api/codegen-core" "0.8.1"
     "@hey-api/json-schema-ref-parser" "1.4.2"
