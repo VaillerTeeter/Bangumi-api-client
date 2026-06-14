@@ -35,7 +35,7 @@
   "devDependencies": {
     "@commitlint/types": "^21.0.1",
     "@hey-api/openapi-ts": "^0.97.1",
-    "@types/node": "^25.6.0",
+    "@types/node": "^25.9.1",
     "typescript": "^6.0.3",
     "vite": "^8.0.10",
     "vitest": "^4.1.7"
