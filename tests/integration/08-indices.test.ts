@@ -97,18 +97,21 @@ describe('IndexAPI 集成测试', () => {
       expect([401, 404]).toContain(result.response.status);
     });
 
-    it.skipIf(!hasToken)('[需要 BGM_TOKEN] 已登录时编辑自己的目录返回 200 且包含必要字段', async () => {
-      // 先创建一个目录，再编辑它
-      const created = await bgmAuth.indices.newIndex();
-      expect(created.response.status).toBe(200);
-      const indexId = created.data!.id;
+    it.skipIf(!hasToken)(
+      '[需要 BGM_TOKEN] 已登录时编辑自己的目录返回 200 且包含必要字段',
+      async () => {
+        // 先创建一个目录，再编辑它
+        const created = await bgmAuth.indices.newIndex();
+        expect(created.response.status).toBe(200);
+        const indexId = created.data!.id;
 
-      const result = await bgmAuth.indices.editIndexById(indexId, { title: 'updated title' });
+        const result = await bgmAuth.indices.editIndexById(indexId, { title: 'updated title' });
 
-      expect(result.error).toBeUndefined();
-      expect(result.response.status).toBe(200);
-      // 注：服务端实际返回空响应体（{}），文档标注的 Index schema 与实现不符
-    });
+        expect(result.error).toBeUndefined();
+        expect(result.response.status).toBe(200);
+        // 注：服务端实际返回空响应体（{}），文档标注的 Index schema 与实现不符
+      },
+    );
   });
 
   describe('getIndexSubjects() — 获取目录条目', () => {
@@ -181,7 +184,10 @@ describe('IndexAPI 集成测试', () => {
       expect(created.response.status).toBe(200);
       const indexId = created.data!.id;
 
-      const result = await bgmAuth.indices.addSubjectToIndex(indexId, { subject_id: 8, comment: 'test' });
+      const result = await bgmAuth.indices.addSubjectToIndex(indexId, {
+        subject_id: 8,
+        comment: 'test',
+      });
 
       expect(result.error).toBeUndefined();
       expect(result.response.status).toBe(200);

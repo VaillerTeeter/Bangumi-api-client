@@ -53,7 +53,7 @@ jobs:
         run: |
           find . \( -name "*.yml" -o -name "*.yaml" \) \
             ! -path "./.git/*" \
-            | grep -v "node_modules\|vendor\|dist" \
+            | grep -v "node_modules\|dist" \
             | xargs yamllint --config-file .lintrc/general/.yamllint.yml
 
   # ============================================================
@@ -125,8 +125,7 @@ jobs:
         uses: gitleaks/gitleaks-action@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          config-path: .lintrc/security/.gitleaks.toml
+          GITLEAKS_CONFIG: .lintrc/security/.gitleaks.toml
 
   # ============================================================
   # Commit message

@@ -78,8 +78,7 @@ export class CollectionAPI {
    *
    * @param username - 用户名（设置了用户名后无法使用 UID）
    * @param options  - 可选过滤和分页参数
-   * @returns `data.data` — `UserSubjectCollection[]`；`data.total` — 总数
-   * @throws 400 — 请求参数有误；404 — 用户不存在
+   * @returns `data.data` — `UserSubjectCollection[]`；`data.total` — 总数；参数有误时返回 HTTP 400，用户不存在时返回 HTTP 404
    */
   async getUserCollections(
     username: string,
@@ -107,8 +106,7 @@ export class CollectionAPI {
    *
    * @param username  - 用户名
    * @param subjectId - 条目 ID
-   * @returns `UserSubjectCollection`（含 subject 详情）
-   * @throws 400 — 请求参数有误；404 — 用户不存在、条目未收藏或条目为私有收藏
+   * @returns `UserSubjectCollection`（含 subject 详情）；参数有误时返回 HTTP 400，用户不存在、条目未收藏或条目为私有收藏时返回 HTTP 404
    */
   async getUserCollectionBySubjectId(
     username: string,
@@ -141,8 +139,7 @@ export class CollectionAPI {
    *
    * @param subjectId - 条目 ID
    * @param payload   - 可选的收藏信息（type / rate / comment / private / tags / ep_status / vol_status）
-   * @returns 成功时 HTTP 204，无响应体
-   * @throws 400 — 参数有误；401 — 未登录；404 — 条目不存在
+   * @returns 成功时 HTTP 204，无响应体；参数有误时返回 HTTP 400，未登录时返回 HTTP 401，条目不存在时返回 HTTP 404
    */
   async postUserCollection(
     subjectId: number,
@@ -173,8 +170,7 @@ export class CollectionAPI {
    *
    * @param subjectId - 条目 ID
    * @param payload   - 可选的收藏信息（type / rate / comment / private / tags / ep_status / vol_status）
-   * @returns 成功时 HTTP 204，无响应体
-   * @throws 400 — 参数有误；401 — 未登录；404 — 条目不存在或未收藏
+   * @returns 成功时 HTTP 204，无响应体；参数有误时返回 HTTP 400，未登录时返回 HTTP 401，条目不存在或未收藏时返回 HTTP 404
    */
   async patchUserCollection(
     subjectId: number,
@@ -201,8 +197,7 @@ export class CollectionAPI {
    *
    * @param subjectId - 条目 ID
    * @param options   - 可选分页与章节类型过滤参数
-   * @returns 分页的 `UserEpisodeCollection` 列表，每条含 `episode`、`type`、`updated_at`
-   * @throws 400 — 参数有误；401 — 未登录；404 — 条目不存在
+   * @returns 分页的 `UserEpisodeCollection` 列表，每条含 `episode`、`type`、`updated_at`；参数有误时返回 HTTP 400，未登录时返回 HTTP 401，条目不存在时返回 HTTP 404
    */
   async getUserSubjectEpisodeCollection(
     subjectId: number,
@@ -233,8 +228,7 @@ export class CollectionAPI {
    *
    * @param subjectId - 条目 ID
    * @param payload   - 必填：`episode_id`（章节 ID 列表）和 `type`（收藏状态 1/2/3）
-   * @returns 成功时 HTTP 204，无响应体
-   * @throws 400 — 参数有误；401 — 未登录；404 — 条目不存在
+   * @returns 成功时 HTTP 204，无响应体；参数有误时返回 HTTP 400，未登录时返回 HTTP 401，条目不存在时返回 HTTP 404
    */
   async patchUserSubjectEpisodeCollection(
     subjectId: number,
@@ -260,8 +254,7 @@ export class CollectionAPI {
    * **需要 access token（认证）。**
    *
    * @param episodeId - 章节 ID
-   * @returns `UserEpisodeCollection`（含 `episode`、`type`、`updated_at`）
-   * @throws 400 — episode ID 无效；401 — 未登录；404 — 条目或章节不存在
+   * @returns `UserEpisodeCollection`（含 `episode`、`type`、`updated_at`）；episode ID 无效时返回 HTTP 400，未登录时返回 HTTP 401，条目或章节不存在时返回 HTTP 404
    */
   async getUserEpisodeCollection(episodeId: number): Promise<ClientResult<UserEpisodeCollection>> {
     const result = await this.client.get<UserEpisodeCollection>({
@@ -284,8 +277,7 @@ export class CollectionAPI {
    *
    * @param episodeId - 章节 ID
    * @param type      - 收藏状态：1=想看 / 2=看过 / 3=抛弃
-   * @returns 成功时 HTTP 204，无响应体
-   * @throws 400 — episode ID 无效或所属条目未收藏；401 — 未登录；404 — 条目或章节不存在
+   * @returns 成功时 HTTP 204，无响应体；episode ID 无效或所属条目未收藏时返回 HTTP 400，未登录时返回 HTTP 401，条目或章节不存在时返回 HTTP 404
    */
   async putUserEpisodeCollection(
     episodeId: number,
@@ -309,8 +301,7 @@ export class CollectionAPI {
    * `GET /v0/users/{username}/collections/-/characters`
    *
    * @param username - 用户名（设置了用户名后无法使用 UID）
-   * @returns 分页的 `UserCharacterCollection` 列表
-   * @throws 404 — 用户不存在
+   * @returns 分页的 `UserCharacterCollection` 列表；用户不存在时返回 HTTP 404
    */
   async getUserCharacterCollections(
     username: string,
@@ -336,8 +327,7 @@ export class CollectionAPI {
    *
    * @param username    - 用户名
    * @param characterId - 角色 ID
-   * @returns `UserCharacterCollection`
-   * @throws 400 — character ID 无效；404 — 用户或角色不存在
+   * @returns `UserCharacterCollection`；character ID 无效时返回 HTTP 400，用户或角色不存在时返回 HTTP 404
    */
   async getUserCharacterCollection(
     username: string,
@@ -363,8 +353,7 @@ export class CollectionAPI {
    * `GET /v0/users/{username}/collections/-/persons`
    *
    * @param username - 用户名
-   * @returns `PagedUserPersonCollection`
-   * @throws 404 — 用户不存在
+   * @returns `PagedUserPersonCollection`；用户不存在时返回 HTTP 404
    */
   async getUserPersonCollections(
     username: string,
@@ -387,8 +376,7 @@ export class CollectionAPI {
    *
    * @param username - 用户名
    * @param personId - 人物 ID
-   * @returns `UserPersonCollection`
-   * @throws 400 — person ID 无效；404 — 用户或人物不存在
+   * @returns `UserPersonCollection`；person ID 无效时返回 HTTP 400，用户或人物不存在时返回 HTTP 404
    */
   async getUserPersonCollection(
     username: string,

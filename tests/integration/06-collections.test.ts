@@ -133,7 +133,10 @@ describe('CollectionAPI 集成测试', () => {
     });
 
     it('返回 HTTP 200 且包含完整收藏数据', async () => {
-      const result = await bgm.collections.getUserCollectionBySubjectId(testUsername, knownSubjectId);
+      const result = await bgm.collections.getUserCollectionBySubjectId(
+        testUsername,
+        knownSubjectId,
+      );
 
       expect(result.error).toBeUndefined();
       expect(result.data).toBeDefined();
@@ -141,14 +144,20 @@ describe('CollectionAPI 集成测试', () => {
     });
 
     it('返回的 subject_id 与请求一致', async () => {
-      const result = await bgm.collections.getUserCollectionBySubjectId(testUsername, knownSubjectId);
+      const result = await bgm.collections.getUserCollectionBySubjectId(
+        testUsername,
+        knownSubjectId,
+      );
 
       expect(result.error).toBeUndefined();
       expect(result.data!.subject_id).toBe(knownSubjectId);
     });
 
     it('返回数据包含必要字段', async () => {
-      const result = await bgm.collections.getUserCollectionBySubjectId(testUsername, knownSubjectId);
+      const result = await bgm.collections.getUserCollectionBySubjectId(
+        testUsername,
+        knownSubjectId,
+      );
 
       expect(result.error).toBeUndefined();
       const item = result.data!;
@@ -176,7 +185,10 @@ describe('CollectionAPI 集成测试', () => {
     });
 
     it('传入不存在的 username 返回 404', async () => {
-      const result = await bgm.collections.getUserCollectionBySubjectId('no_such_user_xyz', knownSubjectId);
+      const result = await bgm.collections.getUserCollectionBySubjectId(
+        'no_such_user_xyz',
+        knownSubjectId,
+      );
 
       expect(result.data).toBeUndefined();
       expect(result.error).toBeDefined();
@@ -212,7 +224,10 @@ describe('CollectionAPI 集成测试', () => {
 
     it.skipIf(!hasToken)('[需要 BGM_TOKEN] 认证后获取自己的单个条目收藏返回 200', async () => {
       if (!selfSubjectId) return; // token 账号无收藏，跳过
-      const result = await bgmAuth.collections.getUserCollectionBySubjectId(selfUsername, selfSubjectId);
+      const result = await bgmAuth.collections.getUserCollectionBySubjectId(
+        selfUsername,
+        selfSubjectId,
+      );
 
       expect(result.error).toBeUndefined();
       expect(result.data).toBeDefined();
@@ -222,7 +237,10 @@ describe('CollectionAPI 集成测试', () => {
 
     it.skipIf(!hasToken)('[需要 BGM_TOKEN] 认证后返回的 private 字段为真实值', async () => {
       if (!selfSubjectId) return; // token 账号无收藏，跳过
-      const result = await bgmAuth.collections.getUserCollectionBySubjectId(selfUsername, selfSubjectId);
+      const result = await bgmAuth.collections.getUserCollectionBySubjectId(
+        selfUsername,
+        selfSubjectId,
+      );
 
       expect(result.error).toBeUndefined();
       expect(typeof result.data!.private).toBe('boolean');
@@ -380,7 +398,9 @@ describe('CollectionAPI 集成测试', () => {
     });
 
     it.skipIf(!hasToken)('[需要 BGM_TOKEN] 每条记录包含必要字段', async () => {
-      const result = await bgmAuth.collections.getUserSubjectEpisodeCollection(testSubjectId, { limit: 5 });
+      const result = await bgmAuth.collections.getUserSubjectEpisodeCollection(testSubjectId, {
+        limit: 5,
+      });
 
       expect(result.error).toBeUndefined();
       const items = result.data!.data!;
@@ -392,15 +412,18 @@ describe('CollectionAPI 集成测试', () => {
       }
     });
 
-    it.skipIf(!hasToken)('[需要 BGM_TOKEN] episode_type 筛选参数生效（type=0 仅本篇）', async () => {
-      const result = await bgmAuth.collections.getUserSubjectEpisodeCollection(testSubjectId, {
-        episode_type: 0,
-        limit: 5,
-      });
+    it.skipIf(!hasToken)(
+      '[需要 BGM_TOKEN] episode_type 筛选参数生效（type=0 仅本篇）',
+      async () => {
+        const result = await bgmAuth.collections.getUserSubjectEpisodeCollection(testSubjectId, {
+          episode_type: 0,
+          limit: 5,
+        });
 
-      expect(result.error).toBeUndefined();
-      expect(result.response.status).toBe(200);
-    });
+        expect(result.error).toBeUndefined();
+        expect(result.response.status).toBe(200);
+      },
+    );
 
     it('传入 subject_id=0 未登录返回 401', async () => {
       // NOTE: 端点需要认证，匿名请求在 subject_id 校验前即返回 401
@@ -441,8 +464,10 @@ describe('CollectionAPI 集成测试', () => {
       if (!hasToken) return;
       bgmAuth = createBangumiClient({ token: token!.trim() });
       // 取前 3 个章节 ID 供批量修改测试使用
-      const r = await bgmAuth.collections.getUserSubjectEpisodeCollection(testSubjectId, { limit: 3 });
-      episodeIds = r.data?.data?.map(e => e.episode.id) ?? [];
+      const r = await bgmAuth.collections.getUserSubjectEpisodeCollection(testSubjectId, {
+        limit: 3,
+      });
+      episodeIds = r.data?.data?.map((e) => e.episode.id) ?? [];
     });
 
     it('未登录时返回 401', async () => {
@@ -665,7 +690,10 @@ describe('CollectionAPI 集成测试', () => {
 
     it('返回 HTTP 200 且包含必要字段', async () => {
       if (!knownCharacterId) return;
-      const result = await bgm.collections.getUserCharacterCollection(testUsername, knownCharacterId);
+      const result = await bgm.collections.getUserCharacterCollection(
+        testUsername,
+        knownCharacterId,
+      );
 
       expect(result.error).toBeUndefined();
       expect(result.data).toBeDefined();
@@ -686,7 +714,10 @@ describe('CollectionAPI 集成测试', () => {
 
     it('传入不存在的 username 返回 404', async () => {
       if (!knownCharacterId) return;
-      const result = await bgm.collections.getUserCharacterCollection('no_such_user_xyz', knownCharacterId);
+      const result = await bgm.collections.getUserCharacterCollection(
+        'no_such_user_xyz',
+        knownCharacterId,
+      );
 
       expect(result.data).toBeUndefined();
       expect(result.error).toBeDefined();
@@ -753,7 +784,10 @@ describe('CollectionAPI 集成测试', () => {
 
     it('传入不存在的 username 返回 404', async () => {
       if (!knownPersonId) return;
-      const result = await bgm.collections.getUserPersonCollection('no_such_user_xyz', knownPersonId);
+      const result = await bgm.collections.getUserPersonCollection(
+        'no_such_user_xyz',
+        knownPersonId,
+      );
 
       expect(result.data).toBeUndefined();
       expect(result.error).toBeDefined();
