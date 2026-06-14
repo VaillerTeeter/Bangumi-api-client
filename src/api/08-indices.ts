@@ -42,8 +42,7 @@ export class IndexAPI {
    *
    * `POST /v0/indices`
    *
-   * @returns `Index`
-   * @throws 401 — 未登录
+   * @returns `Index`；未登录时返回 HTTP 401
    */
   async newIndex(): Promise<ClientResult<Index>> {
     const result = await this.client.post<Index>({
@@ -63,8 +62,7 @@ export class IndexAPI {
    * `GET /v0/indices/{index_id}`
    *
    * @param indexId - 目录 ID
-   * @returns `Index`
-   * @throws 404 — 目录不存在
+   * @returns `Index`；目录不存在时返回 HTTP 404
    */
   async getIndexById(indexId: number): Promise<ClientResult<Index>> {
     const result = await this.client.get<Index>({
@@ -85,10 +83,7 @@ export class IndexAPI {
    *
    * @param indexId - 目录 ID
    * @param body    - 要修改的字段（title、description）
-   * @returns `Index`
-   * @throws 400 — 请求参数错误
-   * @throws 401 — 未登录
-   * @throws 404 — 目录不存在
+   * @returns `Index`；请求参数错误时返回 HTTP 400，未登录时返回 HTTP 401，目录不存在时返回 HTTP 404
    */
   async editIndexById(indexId: number, body?: IndexBasicInfo): Promise<ClientResult<Index>> {
     const result = await this.client.put<Index>({
@@ -114,9 +109,7 @@ export class IndexAPI {
    * @param options.type   - 条目类型过滤（可选）
    * @param options.limit  - 每页条数（可选）
    * @param options.offset - 分页偏移（可选）
-   * @returns 分页列表，包含 `total`、`limit`、`offset`、`data`
-   * @throws 400 — 请求参数错误
-   * @throws 404 — 目录不存在
+   * @returns 分页列表，包含 `total`、`limit`、`offset`、`data`；请求参数错误时返回 HTTP 400，目录不存在时返回 HTTP 404
    */
   async getIndexSubjects(
     indexId: number,
@@ -151,10 +144,7 @@ export class IndexAPI {
    *
    * @param indexId - 目录 ID
    * @param body    - 条目信息（subject_id、sort、comment）
-   * @returns 成功时 `error` 为 `undefined`
-   * @throws 400 — 请求参数错误
-   * @throws 401 — 未登录
-   * @throws 404 — 目录不存在
+   * @returns 成功时 `error` 为 `undefined`；请求参数错误时返回 HTTP 400，未登录时返回 HTTP 401，目录不存在时返回 HTTP 404
    */
   async addSubjectToIndex(
     indexId: number,
@@ -181,10 +171,7 @@ export class IndexAPI {
    * @param indexId   - 目录 ID
    * @param subjectId - 条目 ID
    * @param body      - 要修改的字段（sort、comment）
-   * @returns 成功时 `error` 为 `undefined`
-   * @throws 400 — 请求参数错误
-   * @throws 401 — 未登录
-   * @throws 404 — 目录或条目不存在
+   * @returns 成功时 `error` 为 `undefined`；请求参数错误时返回 HTTP 400，未登录时返回 HTTP 401，目录或条目不存在时返回 HTTP 404
    */
   async editIndexSubject(
     indexId: number,
@@ -211,9 +198,7 @@ export class IndexAPI {
    *
    * @param indexId   - 目录 ID
    * @param subjectId - 条目 ID
-   * @returns 成功时 `error` 为 `undefined`
-   * @throws 401 — 未登录
-   * @throws 404 — 目录或条目不存在
+   * @returns 成功时 `error` 为 `undefined`；未登录时返回 HTTP 401，目录或条目不存在时返回 HTTP 404
    */
   async deleteIndexSubject(indexId: number, subjectId: number): Promise<ClientResult<unknown>> {
     const result = await this.client.delete({
@@ -233,10 +218,7 @@ export class IndexAPI {
    * `POST /v0/indices/{index_id}/collect`
    *
    * @param indexId - 目录 ID
-   * @returns 成功时 `error` 为 `undefined`
-   * @throws 401 — 未登录
-   * @throws 404 — 目录不存在
-   * @throws 500 — 服务器内部错误
+   * @returns 成功时 `error` 为 `undefined`；未登录时返回 HTTP 401，目录不存在时返回 HTTP 404，服务器内部错误时返回 HTTP 500
    */
   async collectIndex(indexId: number): Promise<ClientResult<unknown>> {
     const result = await this.client.post({
@@ -258,10 +240,7 @@ export class IndexAPI {
    * `DELETE /v0/indices/{index_id}/collect`
    *
    * @param indexId - 目录 ID
-   * @returns 成功时 `error` 为 `undefined`
-   * @throws 401 — 未登录
-   * @throws 404 — 目录不存在
-   * @throws 500 — 服务器内部错误
+   * @returns 成功时 `error` 为 `undefined`；未登录时返回 HTTP 401，目录不存在时返回 HTTP 404，服务器内部错误时返回 HTTP 500
    */
   async uncollectIndex(indexId: number): Promise<ClientResult<unknown>> {
     const result = await this.client.delete({

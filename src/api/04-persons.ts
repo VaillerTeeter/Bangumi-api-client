@@ -84,8 +84,7 @@ export class PersonAPI {
    * `GET /v0/persons/{person_id}`
    *
    * @param personId - 人物 ID
-   * @returns 人物详情对象
-   * @throws 400 — 请求参数有误；404 — 人物不存在
+   * @returns 人物详情对象；参数有误时返回 HTTP 400，人物不存在时返回 HTTP 404
    */
   async getPersonById(personId: number): Promise<ClientResult<PersonDetail>> {
     const result = await this.client.get<PersonDetail>({
@@ -141,8 +140,7 @@ export class PersonAPI {
    * `GET /v0/persons/{person_id}/subjects`
    *
    * @param personId - 人物 ID
-   * @returns `data` — `V0RelatedSubject[]`，含 id / type / staff / eps / name / name_cn / image
-   * @throws 400 — 请求参数有误；404 — 人物不存在
+   * @returns `data` — `V0RelatedSubject[]`，含 id / type / staff / eps / name / name_cn / image；参数有误时返回 HTTP 400，人物不存在时返回 HTTP 404
    */
   async getRelatedSubjectsByPersonId(personId: number): Promise<ClientResult<V0RelatedSubject[]>> {
     const result = await this.client.get<V0RelatedSubject[]>({
@@ -162,8 +160,7 @@ export class PersonAPI {
    * `GET /v0/persons/{person_id}/characters`
    *
    * @param personId - 人物 ID
-   * @returns `data` — `PersonCharacter[]`，含 id / name / type / images / subject_id / subject_type / subject_name / subject_name_cn / staff
-   * @throws 400 — 请求参数有误；404 — 人物不存在
+   * @returns `data` — `PersonCharacter[]`，含 id / name / type / images / subject_id / subject_type / subject_name / subject_name_cn / staff；参数有误时返回 HTTP 400，人物不存在时返回 HTTP 404
    */
   async getRelatedCharactersByPersonId(personId: number): Promise<ClientResult<PersonCharacter[]>> {
     const result = await this.client.get<PersonCharacter[]>({
@@ -189,8 +186,7 @@ export class PersonAPI {
    * 成功时返回 HTTP 204 No Content，`data` 为 `undefined`。
    *
    * @param personId - 人物 ID
-   * @returns 成功时 `error` 为 `undefined`，`response.status` 为 204
-   * @throws 400 — 参数有误；401 — 未登录；404 — 人物不存在
+   * @returns 成功时 `error` 为 `undefined`，`response.status` 为 204；参数有误时返回 HTTP 400，未登录时返回 HTTP 401，人物不存在时返回 HTTP 404
    */
   async collectPerson(personId: number): Promise<ClientResult<undefined>> {
     const result = await this.client.post<undefined>({
@@ -213,8 +209,7 @@ export class PersonAPI {
    * 成功时返回 HTTP 204 No Content，`data` 为 `undefined`。
    *
    * @param personId - 人物 ID
-   * @returns 成功时 `error` 为 `undefined`，`response.status` 为 204
-   * @throws 400 — 参数有误；401 — 未登录；404 — 人物不存在
+   * @returns 成功时 `error` 为 `undefined`，`response.status` 为 204；参数有误时返回 HTTP 400，未登录时返回 HTTP 401，人物不存在时返回 HTTP 404
    */
   async uncollectPerson(personId: number): Promise<ClientResult<undefined>> {
     const result = await this.client.delete<undefined>({

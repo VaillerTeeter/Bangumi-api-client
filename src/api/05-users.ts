@@ -33,8 +33,7 @@ export class UserAPI {
    * 注意：设置了用户名之后无法使用 UID，必须传字符串用户名。
    *
    * @param username - 用户名（唯一，初始与 UID 相同，可修改一次）
-   * @returns 用户信息对象，含 id / username / nickname / user_group / avatar / sign
-   * @throws 400 — username 太长；404 — 对应用户不存在
+   * @returns 用户信息对象，含 id / username / nickname / user_group / avatar / sign；用户名太长时返回 HTTP 400，用户不存在时返回 HTTP 404
    */
   async getUserByName(username: string): Promise<ClientResult<User>> {
     const result = await this.client.get<User>({
@@ -55,8 +54,7 @@ export class UserAPI {
    *
    * @param username - 用户名
    * @param type     - 头像尺寸：`'small'` / `'medium'` / `'large'`
-   * @returns `imageUrl` — 跟随重定向后的最终图片 URL；失败时为 `undefined`
-   * @throws 400 — username 太长；404 — 对应用户不存在
+   * @returns `imageUrl` — 跟随重定向后的最终图片 URL；失败时为 `undefined`；用户名太长时返回 HTTP 400，用户不存在时返回 HTTP 404
    */
   async getUserAvatarByName(
     username: string,
@@ -92,8 +90,7 @@ export class UserAPI {
    *
    * 除标准用户字段外，还可能返回 `email`、`reg_time`、`time_offset` 等额外字段。
    *
-   * @returns 当前登录用户的完整信息
-   * @throws 401 — 未提供有效 Token
+   * @returns 当前登录用户的完整信息；未提供有效 Token 时返回 HTTP 401
    */
   async getMyself(): Promise<ClientResult<GetMyselfResponse>> {
     const result = await this.client.get<GetMyselfResponse>({

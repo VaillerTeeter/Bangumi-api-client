@@ -52,7 +52,9 @@ describe('CharacterAPI 集成测试', () => {
 
     it('搜索无匹配时仍返回 HTTP 200（不返回 404）', async () => {
       // Bangumi 使用模糊匹配，即使关键词无精确匹配也会返回 200
-      const result = await bgm.characters.searchCharacters('这个角色名字绝对不会存在xyzxyzxyz123456');
+      const result = await bgm.characters.searchCharacters(
+        '这个角色名字绝对不会存在xyzxyzxyz123456',
+      );
 
       expect(result.error).toBeUndefined();
       expect(result.response.status).toBe(200);

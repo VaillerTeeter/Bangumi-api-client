@@ -1,10 +1,11 @@
 # CI 检查说明
 
-本项目共有三个 GitHub Actions 工作流：
+本项目有以下 GitHub Actions 工作流：
 
 | 工作流 | 文件 | 说明 |
 | --- | --- | --- |
 | Lint | [lint.yml](../../../.github/workflows/lint.yml) | 代码质量、格式、安全扫描 |
+| PR Review Command | [review-command.yml](../../../.github/workflows/review-command.yml) | AI 代码审查（`/review`、`/review-all` 命令） |
 | Test | [test.yml](../../../.github/workflows/test.yml) | 集成测试（访问 api.bgm.tv） |
 | Release | [release.yml](../../../.github/workflows/release.yml) | 构建并发布到 npm |
 
@@ -12,7 +13,7 @@
 
 ## Lint 工作流
 
-所有 Pull Request 合并到 `master` 前，必须通过适用的自动检查工作流，包括 [.github/workflows/lint.yml](../../../.github/workflows/lint.yml) 和 [.github/workflows/test.yml](../../../.github/workflows/test.yml)；以下内容说明的是 `lint.yml` 中定义的检查：
+所有 Pull Request 合并到 `master` 前，必须通过 [.github/workflows/lint.yml](../../../.github/workflows/lint.yml) 中定义的所有检查。
 
 ### 触发时机
 
@@ -40,7 +41,7 @@
 
 **工具**：[yamllint](https://yamllint.readthedocs.io/) 1.35.1
 **配置**：[.lintrc/general/.yamllint.yml](../../../.lintrc/general/.yamllint.yml)
-**扫描范围**：所有 `*.yml` / `*.yaml`，排除 `node_modules`、`vendor`、`dist`
+**扫描范围**：所有 `*.yml` / `*.yaml`，排除 `node_modules`、`dist`
 
 | 规则 | 配置 | 说明 |
 | --- | --- | --- |
@@ -203,3 +204,39 @@
 3. `npm publish --access public` — 发布到 npm（`prepare` 生命周期脚本自动触发构建）
 
 **所需 Secret**：`NPM_TOKEN`（npm Granular Access Token，需有 `Read and write` packages 权限）
+
+---
+
+## PR Review Command 工作流
+
+通过 PR 评论中的命令触发 AI 代码审查，由 [.github/workflows/review-command.yml](../../../.github/workflows/review-command.yml) 定义。
+
+### 触发方式
+
+在 PR 中发布 issue comment 包含以下命令：
+
+| 命令 | 审查范围 | 说明 |
+| --- | --- | --- |
+| `/review` | 增量（diff） | 仅审查当前 PR 的变更 |
+| `/review-all` | 全量（full） | 审查 PR 涉及的全部文件 |
+
+### 执行流程
+
+1. **检出 PR 代码**：`refs/pull/<number>/head`
+2. **设置 Node.js 24** 环境
+3. **执行**：`node .github/scripts/ai-review.mjs`
+
+### 环境变量
+
+| 变量 | 说明 |
+| --- | --- |
+| `GITHUB_TOKEN` | `${{ secrets.GITHUB_TOKEN }}` |
+| `OPENAI_API_KEY` | `${{ secrets.CLINE_API_KEY }}` |
+| `OPENAI_API_ENDPOINT` | `https://api.cline.bot/api/v1` |
+| `MODEL` | `deepseek/deepseek-v4-pro` |
+| `LANGUAGE` | `Chinese`（审查意见语言） |
+| `REVIEW_MODE` | 根据命令自动设置（`full` 或 `diff`） |
+
+### 权限
+
+`contents: read`、`pull-requests: write`（需要 `pull-requests: write` 以发布审查评论）

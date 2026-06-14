@@ -49,8 +49,7 @@ export class RevisionAPI {
    *
    * @param personId - 人物 ID（必填）
    * @param options  - 可选分页参数
-   * @returns `PagedRevision`
-   * @throws 400 — 参数有误
+   * @returns `PagedRevision`；参数有误时返回 HTTP 400
    */
   async getPersonRevisions(
     personId: number,
@@ -74,8 +73,7 @@ export class RevisionAPI {
    * `GET /v0/revisions/persons/{revision_id}`
    *
    * @param revisionId - 历史版本 ID
-   * @returns `PersonRevision`
-   * @throws 400 — revision ID 无效；404 — 记录不存在
+   * @returns `PersonRevision`；revision ID 无效时返回 HTTP 400，记录不存在时返回 HTTP 404
    */
   async getPersonRevisionByRevisionId(revisionId: number): Promise<ClientResult<PersonRevision>> {
     const result = await this.client.get<PersonRevision>({
@@ -99,8 +97,7 @@ export class RevisionAPI {
    *
    * @param characterId - 角色 ID（必填）
    * @param options     - 可选分页参数
-   * @returns `PagedRevision`
-   * @throws 400 — 参数有误
+   * @returns `PagedRevision`；参数有误时返回 HTTP 400
    */
   async getCharacterRevisions(
     characterId: number,
@@ -124,8 +121,7 @@ export class RevisionAPI {
    * `GET /v0/revisions/characters/{revision_id}`
    *
    * @param revisionId - 历史版本 ID
-   * @returns `CharacterRevision`
-   * @throws 400 — revision ID 无效；404 — 记录不存在
+   * @returns `CharacterRevision`；revision ID 无效时返回 HTTP 400，记录不存在时返回 HTTP 404
    */
   async getCharacterRevisionByRevisionId(
     revisionId: number,
@@ -151,8 +147,7 @@ export class RevisionAPI {
    *
    * @param subjectId - 条目 ID（必填）
    * @param options   - 可选分页参数 `limit` / `offset`
-   * @returns `PagedRevision`
-   * @throws 400 — 参数无效
+   * @returns `PagedRevision`；参数无效时返回 HTTP 400
    */
   async getSubjectRevisions(
     subjectId: number,
@@ -176,8 +171,7 @@ export class RevisionAPI {
    * `GET /v0/revisions/subjects/{revision_id}`
    *
    * @param revisionId - 历史版本 ID
-   * @returns `SubjectRevision`
-   * @throws 400 — revision ID 无效；404 — 记录不存在
+   * @returns `SubjectRevision`；revision ID 无效时返回 HTTP 400，记录不存在时返回 HTTP 404
    */
   async getSubjectRevisionByRevisionId(revisionId: number): Promise<ClientResult<SubjectRevision>> {
     const result = await this.client.get<SubjectRevision>({
@@ -201,8 +195,7 @@ export class RevisionAPI {
    *
    * @param episodeId - 章节 ID（必填）
    * @param options   - 可选分页参数 `limit` / `offset`
-   * @returns `PagedRevision`
-   * @throws 400 — 参数无效
+   * @returns `PagedRevision`；参数无效时返回 HTTP 400
    */
   async getEpisodeRevisions(
     episodeId: number,
@@ -226,8 +219,7 @@ export class RevisionAPI {
    * `GET /v0/revisions/episodes/{revision_id}`
    *
    * @param revisionId - 历史版本 ID
-   * @returns `DetailedRevision`
-   * @throws 400 — revision ID 无效；404 — 记录不存在
+   * @returns `DetailedRevision`；revision ID 无效时返回 HTTP 400，记录不存在时返回 HTTP 404
    */
   async getEpisodeRevisionByRevisionId(
     revisionId: number,

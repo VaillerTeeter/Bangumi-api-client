@@ -88,8 +88,7 @@ export class CharacterAPI {
    * `GET /v0/characters/{character_id}`
    *
    * @param characterId - 角色 ID
-   * @returns 角色详情对象
-   * @throws 400 — 请求参数有误；404 — 角色不存在
+   * @returns 角色详情对象；参数有误时返回 HTTP 400，角色不存在时返回 HTTP 404
    */
   async getCharacterById(characterId: number): Promise<ClientResult<Character>> {
     const result = await this.client.get<Character>({
@@ -148,8 +147,7 @@ export class CharacterAPI {
    * `GET /v0/characters/{character_id}/subjects`，
    *
    * @param characterId - 角色 ID
-   * @returns `data` — `V0RelatedSubject[]`，含 id / type / staff / name / name_cn / image
-   * @throws 400 — 请求参数有误；404 — 角色不存在
+   * @returns `data` — `V0RelatedSubject[]`，含 id / type / staff / name / name_cn / image；参数有误时返回 HTTP 400，角色不存在时返回 HTTP 404
    */
   async getRelatedSubjectsByCharacterId(
     characterId: number,
@@ -174,8 +172,7 @@ export class CharacterAPI {
    * `GET /v0/characters/{character_id}/persons`
    *
    * @param characterId - 角色 ID
-   * @returns `data` — `CharacterPerson[]`，含 id / name / type / subject_id / subject_type / staff
-   * @throws 400 — 请求参数有误；404 — 角色不存在
+   * @returns `data` — `CharacterPerson[]`，含 id / name / type / subject_id / subject_type / staff；参数有误时返回 HTTP 400，角色不存在时返回 HTTP 404
    */
   async getRelatedPersonsByCharacterId(
     characterId: number,
@@ -203,8 +200,7 @@ export class CharacterAPI {
    * 成功时返回 HTTP 204 No Content，`data` 为 `undefined`。
    *
    * @param characterId - 角色 ID
-   * @returns 成功时 `error` 为 `undefined`，`response.status` 为 204
-   * @throws 400 — 参数有误；401 — 未登录；404 — 角色不存在
+   * @returns 成功时 `error` 为 `undefined`，`response.status` 为 204；参数有误时返回 HTTP 400，未登录时返回 HTTP 401，角色不存在时返回 HTTP 404
    */
   async collectCharacter(characterId: number): Promise<ClientResult<undefined>> {
     const result = await this.client.post<undefined>({
@@ -227,8 +223,7 @@ export class CharacterAPI {
    * 成功时返回 HTTP 204 No Content，`data` 为 `undefined`。
    *
    * @param characterId - 角色 ID
-   * @returns 成功时 `error` 为 `undefined`，`response.status` 为 204
-   * @throws 400 — 参数有误；401 — 未登录；404 — 角色不存在
+   * @returns 成功时 `error` 为 `undefined`，`response.status` 为 204；参数有误时返回 HTTP 400，未登录时返回 HTTP 401，角色不存在时返回 HTTP 404
    */
   async uncollectCharacter(characterId: number): Promise<ClientResult<undefined>> {
     const result = await this.client.delete<undefined>({

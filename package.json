@@ -1,6 +1,6 @@
 {
   "name": "bangumi-api-client",
-  "version": "2026.5.1",
+  "version": "2026.6.14",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -28,9 +28,6 @@
     "pretest": "yarn generate",
     "test": "vitest run tests/integration",
     "prepare": "yarn build"
-  },
-  "dependencies": {
-    "@hey-api/client-fetch": "^0.13.1"
   },
   "devDependencies": {
     "@commitlint/types": "^21.0.1",

@@ -69,6 +69,10 @@
     "oderwat.indent-rainbow",
     "christian-kohler.path-intellisense",
     "kisstkondoros.vscode-gutter-preview",
-    "adpyke.codesnap"
+    "adpyke.codesnap",
+
+    // ── AI / 辅助 ─────────────────────────────────────────
+    "saoudrizwan.claude-dev",
+    "tomoki1207.pdf"
   ]
 }
