@@ -30,7 +30,7 @@
     "prepare": "yarn build"
   },
   "devDependencies": {
-    "@commitlint/types": "^21.0.1",
+    "@commitlint/types": "^21.2.0",
     "@hey-api/openapi-ts": "^0.98.2",
     "@types/node": "^26.0.1",
     "typescript": "^6.0.3",
