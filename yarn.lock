@@ -32,33 +32,33 @@
   dependencies:
     tslib "^2.4.0"
 
-"@hey-api/codegen-core@0.9.0":
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/@hey-api/codegen-core/-/codegen-core-0.9.0.tgz#6df658ed874cef3c318c1a5184d2e754bdb54e24"
-  integrity sha512-OK9/R8WuujwgvnrDIPnEiIf6WnfUOi3GaEr6kIngqoI5FUQwYbeDKHE/frTVUl2A76ZQPCrMknHtPx6Gqtwf8Q==
+"@hey-api/codegen-core@0.9.1":
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/@hey-api/codegen-core/-/codegen-core-0.9.1.tgz#e66bcc294ee16c4dcb8b8750b70e62d3b53f5fea"
+  integrity sha512-s97jL1dgTMuiMHv2BZ1X4Tgd99Mf9GOvGdNqNcGwIMmnR+PgYNoraj4Zvp134MKsNCap/m7k0r0vKKnl56pj4w==
   dependencies:
     "@hey-api/types" "0.1.4"
     ansi-colors "4.1.3"
     c12 "3.3.4"
     color-support "1.1.3"
 
-"@hey-api/json-schema-ref-parser@1.4.3":
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/@hey-api/json-schema-ref-parser/-/json-schema-ref-parser-1.4.3.tgz#26ad040e07360dd8f9448afd932fed478faa210a"
-  integrity sha512-UzGSDzh3QUhrnwl4atnHc2YqDO6KemYVEOwl1Ynowm/tcr0XlpdHOpyWr5UaWIJfiXTXdYRIC9k2Yxm19pcPzQ==
+"@hey-api/json-schema-ref-parser@1.4.4":
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/@hey-api/json-schema-ref-parser/-/json-schema-ref-parser-1.4.4.tgz#d5108418ab5af0bffbace5813256248662f32039"
+  integrity sha512-otmd+zCxbYVBIp/mlMTnGkvlNYLkVKgs3VOIq0kSnenhB1+fRwLPQIeSwyWM6E51oXhUedkYjVsVpkVexeuJOA==
   dependencies:
     "@jsdevtools/ono" "7.1.3"
     "@types/json-schema" "7.0.15"
-    js-yaml "4.1.1"
+    js-yaml "4.2.0"
 
-"@hey-api/openapi-ts@^0.98.2":
-  version "0.98.2"
-  resolved "https://registry.yarnpkg.com/@hey-api/openapi-ts/-/openapi-ts-0.98.2.tgz#a56b0d5f0c589acc1146eaa3dac37404f3f26895"
-  integrity sha512-2nVJXH8tpFPGTBOhxyjEd1Jw0hsRqJqeTQW3kltAjVdSU4YWxeu97x5sgNOmsbsfeg6Dqz7Wfzs26walBOuswA==
+"@hey-api/openapi-ts@^0.99.0":
+  version "0.99.0"
+  resolved "https://registry.yarnpkg.com/@hey-api/openapi-ts/-/openapi-ts-0.99.0.tgz#d55d0636f40490000aa0efbe1b193610fc2c4992"
+  integrity sha512-SePU/5oEWWkvUBYmvzdYRctseoLuskyhs4ET0RvLIcmzc8yLQoA2R+KtBIQ8bPsoSUB0m4E5SmBnl6aGSA0szQ==
   dependencies:
-    "@hey-api/codegen-core" "0.9.0"
-    "@hey-api/json-schema-ref-parser" "1.4.3"
-    "@hey-api/shared" "0.4.8"
+    "@hey-api/codegen-core" "0.9.1"
+    "@hey-api/json-schema-ref-parser" "1.4.4"
+    "@hey-api/shared" "0.5.0"
     "@hey-api/spec-types" "0.2.0"
     "@hey-api/types" "0.1.4"
     "@lukeed/ms" "2.0.2"
@@ -67,19 +67,19 @@
     commander "15.0.0"
     get-tsconfig "4.14.0"
 
-"@hey-api/shared@0.4.8":
-  version "0.4.8"
-  resolved "https://registry.yarnpkg.com/@hey-api/shared/-/shared-0.4.8.tgz#b8db4b45a4a7fa8fad604c100f0dbb95f1c8c32f"
-  integrity sha512-29Pg2FB0UW20pplYgcfiQn1hQYpbZ9D2gdDJc7nDK3xh3pvHOTGP0v3R2ueFpFnw9GN1SRhIdhiVuAYWMDimjA==
+"@hey-api/shared@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@hey-api/shared/-/shared-0.5.0.tgz#89a07225eb15d69b0881a106109158861ea8b46a"
+  integrity sha512-JN/j4Ebh4cJGYIQ5cwWuqe7GeSUyQoz7oC51WqyhKOcrejK6DKZMDkshc5d1eKTRuRL+rjozuRcoUaZZn2DGPw==
   dependencies:
-    "@hey-api/codegen-core" "0.9.0"
-    "@hey-api/json-schema-ref-parser" "1.4.3"
+    "@hey-api/codegen-core" "0.9.1"
+    "@hey-api/json-schema-ref-parser" "1.4.4"
     "@hey-api/spec-types" "0.2.0"
     "@hey-api/types" "0.1.4"
     ansi-colors "4.1.3"
     cross-spawn "7.0.6"
     open "11.0.0"
-    semver "7.8.2"
+    semver "7.8.4"
 
 "@hey-api/spec-types@0.2.0":
   version "0.2.0"
@@ -516,10 +516,10 @@ jiti@^2.6.1:
   resolved "https://registry.yarnpkg.com/jiti/-/jiti-2.7.0.tgz#974228f2f4ca2bc21885a1797b45fea68e950c64"
   integrity sha512-AC/7JofJvZGrrneWNaEnJeOLUx+JlGt7tNa0wZiRPT4MY1wmfKjt2+6O2p2uz2+skll8OZZmJMNqeke7kKbNgQ==
 
-js-yaml@4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-4.1.1.tgz#854c292467705b699476e1a2decc0c8a3458806b"
-  integrity sha512-qQKT4zQxXl8lLwBtHMWwaTcGfFOZviOJet3Oy/xmGk2gZH677CJM9EvtfdSkgWcATZhj/55JZ0rmy3myCT5lsA==
+js-yaml@4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-4.2.0.tgz#2bd9e85682dd91bd469afb809d816043b3d49524"
+  integrity sha512-ePWsvanv0DWuDRsW8dnt+R4jQ31SCRCQ7hhNcPXZPsoBZiemuZNYGf7adZdqX2D86j6rvKp3RpCxVTSb8WQlOw==
   dependencies:
     argparse "^2.0.1"
 
@@ -731,10 +731,10 @@ run-applescript@^7.0.0:
   resolved "https://registry.yarnpkg.com/run-applescript/-/run-applescript-7.1.0.tgz#2e9e54c4664ec3106c5b5630e249d3d6595c4911"
   integrity sha512-DPe5pVFaAsinSaV6QjQ6gdiedWDcRCbUuiQfQa2wmWV7+xC9bGulGI8+TdRmoFkAPaBXk8CrAbnlY2ISniJ47Q==
 
-semver@7.8.2:
-  version "7.8.2"
-  resolved "https://registry.yarnpkg.com/semver/-/semver-7.8.2.tgz#194bd65723a28cf82542d2bf176b91c26b343be1"
-  integrity sha512-c8jsqUZm3omBOI66G90z1Dyw5z622G8oLG+omfsHBJf3CWQTlOcwOjvOG6wtiNfW6anKm/eA39LMwMtMez2TiQ==
+semver@7.8.4:
+  version "7.8.4"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-7.8.4.tgz#c73eceebae0616934be8dff28a7fd70757c8e696"
+  integrity sha512-rUCObTnP32Q08R2uuIrt7r9PlEonuTmtuXYcW6s5kjdlj3xbnwe+21yXptAUYcMAABLkYYTtnmzb3w3EDZfueA==
 
 shebang-command@^2.0.0:
   version "2.0.0"
