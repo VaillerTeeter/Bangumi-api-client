@@ -7,9 +7,26 @@
 
   "ignore": [],
 
-  "ignoreDependencies": ["@hey-api/client-fetch", "@commitlint/types"],
+  "ignoreDependencies": [
+    "@hey-api/client-fetch",
+    "@commitlint/types",
+    "@typescript-eslint/eslint-plugin",
+    "@typescript-eslint/parser"
+  ],
 
   "ignoreBinaries": ["commitlint", "cspell", "eslint", "prettier"],
+
+  "ignoreUnresolved": [
+    "eslint",
+    "eslint-plugin-import",
+    "eslint-plugin-unicorn",
+    "eslint-plugin-sonarjs",
+    "eslint-plugin-security",
+    "eslint-plugin-promise",
+    "eslint-plugin-n",
+    "eslint-plugin-jsdoc",
+    "eslint-import-resolver-typescript"
+  ],
 
   "includeEntryExports": false,
 
@@ -25,7 +42,6 @@
     "unresolved": "error",
     "exports": "error",
     "nsExports": "error",
-    "classMembers": "error",
     "types": "error",
     "nsTypes": "error",
     "enumMembers": "error",
