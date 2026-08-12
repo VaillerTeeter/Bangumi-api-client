@@ -122,10 +122,9 @@ jobs:
           fetch-depth: 0
 
       - name: Run Gitleaks
-        uses: gitleaks/gitleaks-action@v3
+        uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITLEAKS_CONFIG: .lintrc/security/.gitleaks.toml
 
   # ============================================================
   # Commit message
@@ -198,7 +197,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: "lts/*"
+          node-version: "22"
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
