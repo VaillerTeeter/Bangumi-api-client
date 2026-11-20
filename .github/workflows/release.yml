@@ -17,6 +17,11 @@ jobs:
   publish:
     name: Build & Publish to npm
     runs-on: ubuntu-latest
+    # setup-node(registry-url) 会在项目根写入含 ${NODE_AUTH_TOKEN} 的 .npmrc；
+    # 其 yarn 缓存探测与 yarn install 会读取该文件，若未定义该变量，Yarn 1 会报
+    # "Failed to replace env in config: ${NODE_AUTH_TOKEN}"。故在 job 级注入。
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
       - uses: actions/checkout@v7
 
@@ -41,5 +46,3 @@ jobs:
 
       - name: Publish to npm
         run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
