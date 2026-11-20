@@ -33,7 +33,9 @@ export interface GetUserSubjectEpisodeCollectionOptions {
 
 /** `patchUserSubjectEpisodeCollection` 的必填请求体。 */
 export interface PatchUserSubjectEpisodeCollectionPayload {
+  /** 要修改的章节 ID 列表 */
   episode_id: number[];
+  /** 目标收藏状态：0=未收藏 / 1=想看 / 2=看过 / 3=抛弃 */
   type: EpisodeCollectionType;
 }
 
@@ -135,7 +137,7 @@ export class CollectionAPI {
    * 由于直接修改剧集条目的完成度可能引起意料之外效果，`ep_status`/`vol_status`
    * 只能用于修改书籍类条目的完成度。
    *
-   * **需要 access token（认证）。**
+   * **需要 access token（认证 + `write:collection` scope）；上游规范已由「可选认证」改为「必须认证」。**
    *
    * @param subjectId - 条目 ID
    * @param payload   - 可选的收藏信息（type / rate / comment / private / tags / ep_status / vol_status）
@@ -166,7 +168,7 @@ export class CollectionAPI {
    * 由于直接修改剧集条目的完成度可能引起意料之外效果，`ep_status`/`vol_status`
    * 只能用于修改书籍类条目的完成度。
    *
-   * **需要 access token（认证）。**
+   * **需要 access token（认证 + `write:collection` scope）；上游规范已由「可选认证」改为「必须认证」。**
    *
    * @param subjectId - 条目 ID
    * @param payload   - 可选的收藏信息（type / rate / comment / private / tags / ep_status / vol_status）
@@ -224,10 +226,10 @@ export class CollectionAPI {
    *
    * `PATCH /v0/users/-/collections/{subject_id}/episodes`
    *
-   * **需要 access token（认证）。**
+   * **需要 access token（认证 + `write:collection` scope）。**
    *
    * @param subjectId - 条目 ID
-   * @param payload   - 必填：`episode_id`（章节 ID 列表）和 `type`（收藏状态 1/2/3）
+   * @param payload   - 必填：`episode_id`（章节 ID 列表）和 `type`（收藏状态 0=未收藏 / 1=想看 / 2=看过 / 3=抛弃）
    * @returns 成功时 HTTP 204，无响应体；参数有误时返回 HTTP 400，未登录时返回 HTTP 401，条目不存在时返回 HTTP 404
    */
   async patchUserSubjectEpisodeCollection(
@@ -273,10 +275,10 @@ export class CollectionAPI {
    *
    * `PUT /v0/users/-/collections/-/episodes/{episode_id}`
    *
-   * **需要 access token（认证）。**
+   * **需要 access token（认证 + `write:collection` scope）。**
    *
    * @param episodeId - 章节 ID
-   * @param type      - 收藏状态：1=想看 / 2=看过 / 3=抛弃
+   * @param type      - 收藏状态：0=未收藏 / 1=想看 / 2=看过 / 3=抛弃
    * @returns 成功时 HTTP 204，无响应体；episode ID 无效或所属条目未收藏时返回 HTTP 400，未登录时返回 HTTP 401，条目或章节不存在时返回 HTTP 404
    */
   async putUserEpisodeCollection(

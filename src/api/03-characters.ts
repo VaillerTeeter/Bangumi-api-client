@@ -196,7 +196,7 @@ export class CharacterAPI {
    *
    * `POST /v0/characters/{character_id}/collect`
    *
-   * 需要登录认证（Bearer Token）。未登录时返回 401。
+   * 需要登录认证（Bearer Token + `write:collection` scope）。未登录时返回 401。
    * 成功时返回 HTTP 204 No Content，`data` 为 `undefined`。
    *
    * @param characterId - 角色 ID
@@ -219,7 +219,7 @@ export class CharacterAPI {
    *
    * `DELETE /v0/characters/{character_id}/collect`
    *
-   * 需要登录认证（Bearer Token）。未登录时返回 401。
+   * 需要登录认证（Bearer Token + `write:collection` scope）。未登录时返回 401。
    * 成功时返回 HTTP 204 No Content，`data` 为 `undefined`。
    *
    * @param characterId - 角色 ID

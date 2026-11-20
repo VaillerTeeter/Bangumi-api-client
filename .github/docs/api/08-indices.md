@@ -14,7 +14,7 @@ import { createBangumiClient } from 'bangumi-api-client';
 // 无需认证的接口（查询目录信息）
 const bgm = createBangumiClient();
 
-// 需要认证的接口（创建、编辑、收藏）
+// 需要认证的接口（创建、编辑、收藏；目录写操作需 `write:indices`，收藏目录需 `write:collection` scope）
 const bgmAuth = createBangumiClient({ token: 'your-access-token' });
 ```
 
