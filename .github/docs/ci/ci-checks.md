@@ -186,6 +186,7 @@
 | --- | --- |
 | 认证接口 | 需要 `BGM_TOKEN` Secret；Fork PR 无此 Secret，认证测试自动跳过 |
 | 公开接口 | 无需 Token，任何 PR 均运行 |
+| 网络抖动 | `vitest.config.ts` 配置 `retry: 1`；图片类用例跟随 302 到外部 CDN，首轮失败自动重试一次 |
 
 ---
 

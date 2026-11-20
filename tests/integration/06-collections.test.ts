@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeAll } from 'vitest';
 import { createBangumiClient } from '../../src/client.js';
+import type { EpisodeCollectionType } from '../../src/generated/types.gen.js';
 
 /**
  * 集成测试：发送真实网络请求到 https://api.bgm.tv
@@ -10,6 +11,11 @@ describe('CollectionAPI 集成测试', () => {
 
   // 使用已知存在的公开用户
   const testUsername = 'sai';
+
+  it('EpisodeCollectionType 契约：0（未收藏）合法', () => {
+    const episodeType: EpisodeCollectionType = 0;
+    expect(episodeType).toBe(0);
+  });
 
   describe('getUserCollections() — 获取用户收藏', () => {
     it('返回 HTTP 200 且包含分页数据结构', async () => {
@@ -492,6 +498,23 @@ describe('CollectionAPI 集成测试', () => {
       expect(result.response.status).toBe(204);
     });
 
+    it.skipIf(!hasToken)('[需要 BGM_TOKEN] 批量标记 type=0（未收藏）返回 204', async () => {
+      if (!episodeIds.length) return;
+      const result = await bgmAuth.collections.patchUserSubjectEpisodeCollection(testSubjectId, {
+        episode_id: episodeIds,
+        type: 0, // 未收藏
+      });
+
+      expect(result.error).toBeUndefined();
+      expect(result.response.status).toBe(204);
+
+      // 还原为「看过」，避免留下脏数据
+      await bgmAuth.collections.patchUserSubjectEpisodeCollection(testSubjectId, {
+        episode_id: episodeIds,
+        type: 2,
+      });
+    });
+
     it('传入 subject_id=0 未登录返回 401', async () => {
       // NOTE: PATCH 端点需要认证，匿名请求在 subject_id 校验前即返回 401
       const result = await bgm.collections.patchUserSubjectEpisodeCollection(0, {
@@ -615,6 +638,17 @@ describe('CollectionAPI 集成测试', () => {
 
       expect(result.error).toBeUndefined();
       expect(result.response.status).toBe(204);
+    });
+
+    it.skipIf(!hasToken)('[需要 BGM_TOKEN] type=0（未收藏）返回 204', async () => {
+      if (!knownEpisodeId) return;
+      const result = await bgmAuth.collections.putUserEpisodeCollection(knownEpisodeId, 0);
+
+      expect(result.error).toBeUndefined();
+      expect(result.response.status).toBe(204);
+
+      // 还原为「看过」，避免留下脏数据
+      await bgmAuth.collections.putUserEpisodeCollection(knownEpisodeId, 2);
     });
 
     it('传入 episode_id=0 未登录返回 401', async () => {

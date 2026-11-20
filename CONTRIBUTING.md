@@ -15,15 +15,15 @@
 
 ```bash
 # 1. Fork 本仓库到你的账号，然后克隆
-git clone git@github.com:<your-username>/Example-of-Github-Repo.git
-cd Example-of-Github-Repo
+git clone git@github.com:<your-username>/Bangumi-api-client.git
+cd Bangumi-api-client
 
-# 2. 配置 GitHub Token
-cp .env.example .env
-# 编辑 .env，填入你的 GH_TOKEN
+# 2. 安装依赖（会自动生成 src/generated/）
+yarn install
 
-# 3. 加载 Token
-export GH_TOKEN="$(grep "^GH_TOKEN=" .env | cut -d= -f2- | tr -d '\r')"
+# 3. 运行集成测试（认证接口需要 BGM_TOKEN，可选）
+export BGM_TOKEN="your-access-token"
+yarn test
 ```
 
 ---
@@ -46,7 +46,7 @@ git commit -m "feat: describe your change"
 git push origin feat/your-feature-name
 
 # 4. 创建 PR（需先写 body 文件，等待确认后再执行）
-# 参考 .github/instructions/git-workflow.instructions.md 中的 PR Workflow 规范
+# 参考 .clinerules/git-workflow.md 中的 PR Workflow 规范
 # a. 将 PR body 写入 tmp/pr-<number>-body.md（按 .github/PULL_REQUEST_TEMPLATE.md 填写）
 # b. 确认内容后执行：
 gh pr create --title "标题" --body-file tmp/pr-<number>-body.md --base master

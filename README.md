@@ -31,7 +31,7 @@ yarn install
 ```bash
 yarn build        # 生成 → 编译 TypeScript 到 dist/
 yarn typecheck    # 生成 → 仅类型检查，不输出产物
-yarn test         # 生成 → 运行集成测试（需联网访问 api.bgm.tv）
+yarn test         # 生成 → 运行集成测试（需联网访问 api.bgm.tv；网络抖动自动重试 1 次）
 ```
 
 > 认证相关测试需通过环境变量 `BGM_TOKEN` 提供 Access Token（`vitest.config.ts` 仅透传 `process.env` 中以 `BGM_` 开头的变量，不会读取 `.env` 文件）。
