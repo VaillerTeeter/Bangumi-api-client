@@ -14,7 +14,7 @@ import { createBangumiClient } from 'bangumi-api-client';
 // 无需认证的接口（查询他人公开收藏）
 const bgm = createBangumiClient();
 
-// 需要认证的接口（操作自己的收藏）
+// 需要认证的接口（操作自己的收藏，修改数据需 `write:collection` scope）
 const bgmAuth = createBangumiClient({ token: 'your-access-token' });
 ```
 
@@ -65,6 +65,7 @@ const bgmAuth = createBangumiClient({ token: 'your-access-token' });
 
 | 值 | 含义 |
 | --- | --- |
+| `0` | 未收藏 |
 | `1` | 想看 |
 | `2` | 看过 |
 | `3` | 抛弃 |
@@ -394,7 +395,7 @@ patchUserSubjectEpisodeCollection(
 | --- | --- | --- | --- |
 | `subjectId` | `number` | 是 | 条目 ID |
 | `payload.episode_id` | `number[]` | 是 | 要修改的章节 ID 列表 |
-| `payload.type` | `EpisodeCollectionType` | 是 | 目标收藏状态（1=想看 2=看过 3=抛弃） |
+| `payload.type` | `EpisodeCollectionType` | 是 | 目标收藏状态（0=未收藏 / 1=想看 / 2=看过 / 3=抛弃） |
 
 <!-- markdownlint-disable-next-line MD024 -->
 ### 返回
@@ -488,7 +489,7 @@ putUserEpisodeCollection(
 | 参数 | 类型 | 必填 | 说明 |
 | --- | --- | --- | --- |
 | `episodeId` | `number` | 是 | 章节 ID |
-| `type` | `EpisodeCollectionType` | 是 | 收藏状态（1=想看 2=看过 3=抛弃） |
+| `type` | `EpisodeCollectionType` | 是 | 收藏状态（0=未收藏 / 1=想看 / 2=看过 / 3=抛弃） |
 
 <!-- markdownlint-disable-next-line MD024 -->
 ### 返回

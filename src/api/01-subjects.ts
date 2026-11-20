@@ -320,7 +320,7 @@ export class SubjectAPI {
    * 返回完整条目信息，包括基础字段、评分、收藏统计、图片、infobox、标签等。
    *
    * @param subjectId - 条目 ID（正整数，传 0 或负数将返回 HTTP 400）
-   * @returns `data` — 完整 `Subject` 对象；不存在时返回 HTTP 404
+   * @returns `data` — 完整 `Subject` 对象（`tags` 元素含 `name` / `count` / `total_count`）；不存在时返回 HTTP 404
    */
   async getSubjectById(subjectId: number): Promise<ClientResult<Subject>> {
     const result = await this.client.get<Subject>({

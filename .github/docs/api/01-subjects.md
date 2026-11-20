@@ -23,7 +23,7 @@ const bgm = createBangumiClient();
 
 | 方法 | HTTP | 路径 | 是否需要认证 |
 | --- | --- | --- | --- |
-| `getCalendar()` | GET | `/calendar` | 否 |
+| `getCalendar()` | GET | `/calendar`（v0 规范外） | 否 |
 | `searchSubjects()` | POST | `/v0/search/subjects` | 否 |
 | `getSubjects()` | GET | `/v0/subjects` | 否 |
 | `getSubjectById()` | GET | `/v0/subjects/{subject_id}` | 否 |
@@ -36,7 +36,7 @@ const bgm = createBangumiClient();
 
 ## 1. getCalendar()
 
-获取每日放送时间表，返回按星期分组的正在放送条目列表。无需认证。
+获取每日放送时间表，返回按星期分组的正在放送条目列表。无需认证。该接口不在 v0 OpenAPI 规范（`open-api/v0.yaml`）中，属上游旧版公共接口。
 
 ### 签名
 
@@ -246,7 +246,7 @@ getSubjectById(subjectId: number): Promise<ClientResult<Subject>>
 | `air_date` | `string` | 放送日期 |
 | `images` | `object` | 封面图 URL（large/common/medium/small/grid） |
 | `infobox` | `array` | Infobox 元数据（原始键值对） |
-| `tags` | `array` | 用户标签列表 |
+| `tags` | `array` | 用户标签列表（每项含 name/count/total_count） |
 | `rating` | `object` | 评分信息（score/rank/total/count） |
 | `collection` | `object` | 收藏统计（wish/collect/doing/on_hold/dropped） |
 | `eps` | `number` | 话数 |

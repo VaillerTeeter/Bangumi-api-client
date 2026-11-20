@@ -182,7 +182,7 @@ export class PersonAPI {
    *
    * `POST /v0/persons/{person_id}/collect`
    *
-   * 需要登录认证（Bearer Token）。未登录时返回 401。
+   * 需要登录认证（Bearer Token + `write:collection` scope，上游规范已改为必须认证）。未登录时返回 401。
    * 成功时返回 HTTP 204 No Content，`data` 为 `undefined`。
    *
    * @param personId - 人物 ID
@@ -205,7 +205,7 @@ export class PersonAPI {
    *
    * `DELETE /v0/persons/{person_id}/collect`
    *
-   * 需要登录认证（Bearer Token）。未登录时返回 4xx。
+   * 需要登录认证（Bearer Token + `write:collection` scope，上游规范已改为必须认证）。未登录时返回 4xx。
    * 成功时返回 HTTP 204 No Content，`data` 为 `undefined`。
    *
    * @param personId - 人物 ID
