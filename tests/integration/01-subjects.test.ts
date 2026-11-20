@@ -238,6 +238,13 @@ describe('SubjectAPI 集成测试', () => {
       expect(typeof d.images.medium).toBe('string');
       expect(Array.isArray(d.meta_tags)).toBe(true);
       expect(Array.isArray(d.tags)).toBe(true);
+      // 规范 2026-07-23 起：SubjectTags 元素新增必填 total_count
+      if (d.tags.length > 0) {
+        const tag = d.tags[0];
+        expect(typeof tag.name).toBe("string");
+        expect(typeof tag.count).toBe("number");
+        expect(typeof tag.total_count).toBe("number");
+      }
     });
 
     it('传入 subject_id=0 返回 400', async () => {
