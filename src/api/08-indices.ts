@@ -38,7 +38,7 @@ export class IndexAPI {
   }
 
   /**
-   * 创建新目录。需要登录认证。
+   * 创建新目录。需要登录认证，需 `write:indices` scope。
    *
    * `POST /v0/indices`
    *
@@ -77,7 +77,7 @@ export class IndexAPI {
   }
 
   /**
-   * 编辑目录。需要登录认证，且必须是目录创建者。
+   * 编辑目录。需要登录认证（`write:indices` scope），且必须是目录创建者。
    *
    * `PUT /v0/indices/{index_id}`
    *
@@ -138,7 +138,7 @@ export class IndexAPI {
   }
 
   /**
-   * 向目录添加条目。需要登录认证，且必须是目录创建者。
+   * 向目录添加条目。需要登录认证（`write:indices` scope），且必须是目录创建者。
    *
    * `POST /v0/indices/{index_id}/subjects`
    *
@@ -164,7 +164,7 @@ export class IndexAPI {
   }
 
   /**
-   * 编辑目录中条目的信息（排序、留言）。需要登录认证，且必须是目录创建者。
+   * 编辑目录中条目的信息（排序、留言）。需要登录认证（`write:indices` scope），且必须是目录创建者。
    *
    * `PUT /v0/indices/{index_id}/subjects/{subject_id}`
    *
@@ -192,7 +192,7 @@ export class IndexAPI {
   }
 
   /**
-   * 从目录中删除条目。需要登录认证，且必须是目录创建者。
+   * 从目录中删除条目。需要登录认证（`write:indices` scope），且必须是目录创建者。
    *
    * `DELETE /v0/indices/{index_id}/subjects/{subject_id}`
    *
@@ -213,7 +213,7 @@ export class IndexAPI {
   }
 
   /**
-   * 收藏目录。需要登录认证。
+   * 收藏目录。需要登录认证，需 `write:collection` scope。
    *
    * `POST /v0/indices/{index_id}/collect`
    *
@@ -235,7 +235,7 @@ export class IndexAPI {
   }
 
   /**
-   * 取消收藏目录。需要登录认证。
+   * 取消收藏目录。需要登录认证，需 `write:collection` scope。
    *
    * `DELETE /v0/indices/{index_id}/collect`
    *

@@ -4,7 +4,7 @@
 
 ## Project Name & Purpose
 
-**Bangumi-api-client** is a TypeScript client library that wraps all 56 endpoints of the [Bangumi API v0](https://github.com/bangumi/api), providing type-safe, high-level calling interfaces across 8 resource modules: Subject, Episode, Character, Person, User, Collection, Revision, and Index.
+**Bangumi-api-client** is a TypeScript client library that wraps all 56 endpoints of the [Bangumi API v0](https://github.com/bangumi/api) (55 from the pinned OpenAPI spec plus the legacy `GET /calendar`), providing type-safe, high-level calling interfaces across 8 resource modules: Subject, Episode, Character, Person, User, Collection, Revision, and Index.
 
 ## Tech Stack
 
@@ -12,7 +12,7 @@
 
 - **TypeScript 5.x** — ESM-first (`"type": "module"`), ES2022 target, `NodeNext` module resolution
 - **@hey-api/openapi-ts** — code generation from official Bangumi OpenAPI YAML spec (dev dependency)
-- **@hey-api/client-fetch** — generated HTTP client runtime (runtime dependency)
+- **@hey-api/client-fetch** — HTTP client template whose code is inlined into `src/generated/client` and `src/generated/core` (not an installed runtime dependency)
 - **Vitest** — test runner with full ESM compatibility
 
 ### Lint & Format
@@ -100,7 +100,7 @@ yarn generate      # Regenerate src/generated/ from OpenAPI YAML
 NEVER suggest installing or re-installing these — already in `package.json`:
 
 - `@hey-api/openapi-ts` — OpenAPI → TypeScript code generator (dev)
-- `@hey-api/client-fetch` — Fetch-based HTTP client (runtime)
+- `@hey-api/client-fetch` — Fetch-based HTTP client (code inlined into `src/generated`; not an installed dependency)
 - `typescript` — TypeScript compiler
 - `vitest` — test runner
 
@@ -116,7 +116,7 @@ NEVER suggest installing or re-installing these — already in `package.json`:
 | CollectionAPI | `src/api/06-collections.ts` | 12 |
 | RevisionAPI | `src/api/07-revisions.ts` | 8 |
 | IndexAPI | `src/api/08-indices.ts` | 9 |
-| **Total** | | **56** |
+| **Total** | | **56**（55 spec + 1 legacy） |
 
 ## Release Workflow
 
@@ -128,7 +128,7 @@ NEVER suggest installing or re-installing these — already in `package.json`:
 
 ## Related Links
 
-- [Bangumi API v0 OpenAPI YAML](https://github.com/bangumi/api/blob/master/open-api/v0.yaml) — source spec
+- [Bangumi API v0 OpenAPI YAML](https://github.com/bangumi/api/blob/master/open-api/v0.yaml) — source spec（本库锁定 `a7055f2`，2026-07-23）
 - [Bangumi API Documentation](https://bangumi.github.io/api/) — online Swagger UI
 - [@hey-api/openapi-ts](https://github.com/hey-api/openapi-ts) — code generator
 - [Template Repository](https://github.com/VaillerTeeter/Example-of-Github-Repo) — CI config, lint rules, templates source

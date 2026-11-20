@@ -1,114 +1,15 @@
 # Bangumi-api-client
 
-基于 [Bangumi API v0](https://github.com/bangumi/api) 的 TypeScript 封装库，提供类型安全的高层调用接口。覆盖全部 56 个接口，包含条目、章节、角色、人物、用户、收藏、编辑历史和目录八大资源模块。
+基于 [Bangumi API v0](https://github.com/bangumi/api) 的 TypeScript 封装库，提供类型安全的高层调用接口。覆盖全部 56 个接口（其中 `getCalendar()` 对应 `GET /calendar`，为 v0 规范外接口），包含条目、章节、角色、人物、用户、收藏、编辑历史和目录八大资源模块。
 
 ## 特性
 
 - **双层架构** — 底层由 `@hey-api/openapi-ts` 从官方 OpenAPI YAML 自动生成，顶层提供面向对象的高层封装
 - **完整类型支持** — 所有请求参数与响应数据均有完整 TypeScript 类型，方法返回值统一为 `Promise<ClientResult<T>>`，开箱即用
 - **ESM 优先** — 使用 `"type": "module"`，支持 Tree-shaking
-- **认证支持** — 可选传入 Access Token，自动附加 `Authorization: Bearer` 头
+- **认证支持** — 可选传入 Access Token，自动附加 `Authorization: Bearer` 头；写操作需 `write:collection` / `write:indices` scope
 - **User-Agent 合规** — 按 Bangumi API 要求自动设置 `User-Agent` 请求头
 - **按资源分类** — `SubjectAPI` / `EpisodeAPI` / `CharacterAPI` / `PersonAPI` / `UserAPI` / `CollectionAPI` / `RevisionAPI` / `IndexAPI`
-
-## 目录结构
-
-```text
-.
-├── .clineignore
-├── .clinerules/                               # Cline AI 编码规范（自动加载）
-│   ├── api-rules.md                           # API 设计标准
-│   ├── git-workflow.md                        # Git 操作约束
-│   ├── project-identity.md                    # 项目身份与架构声明
-│   └── typescript-rules.md                    # TypeScript 编码规范
-├── .editorconfig                              # 编辑器通用格式规范（缩进/换行/编码）
-├── .github/                                   # GitHub 仓库配置与文档
-│   ├── ISSUE_TEMPLATE/                        # Issue 模板（中英文 bug/feature 各一份）
-│   │   ├── bug_report_en.md
-│   │   ├── bug_report_zh.md
-│   │   ├── config.yml
-│   │   ├── feature_request_en.md
-│   │   └── feature_request_zh.md
-│   ├── PULL_REQUEST_TEMPLATE.md               # PR 描述模板
-│   ├── dependabot.yml                         # Dependabot 自动依赖更新配置
-│   ├── docs/                                  # 项目文档
-│   │   ├── api/                               # API 使用文档（各模块方法说明与示例）
-│   │   │   ├── 01-subjects.md                 # SubjectAPI — 条目（8 个接口）
-│   │   │   ├── 02-episodes.md                 # EpisodeAPI — 章节（2 个接口）
-│   │   │   ├── 03-characters.md               # CharacterAPI — 角色（7 个接口）
-│   │   │   ├── 04-persons.md                  # PersonAPI — 人物（7 个接口）
-│   │   │   ├── 05-users.md                    # UserAPI — 用户（3 个接口）
-│   │   │   ├── 06-collections.md              # CollectionAPI — 收藏（12 个接口）
-│   │   │   ├── 07-revisions.md                # RevisionAPI — 编辑历史（8 个接口）
-│   │   │   └── 08-indices.md                  # IndexAPI — 目录（9 个接口）
-│   │   └── ci/
-│   │       └── ci-checks.md                   # CI 检查规则说明
-│   ├── scripts/
-│   │   └── ai-review.mjs                      # AI 代码审查脚本
-│   └── workflows/                             # GitHub Actions 工作流
-│       ├── lint.yml                           # CI Lint 工作流（代码质量/格式/安全扫描）
-│       ├── release.yml                        # CI Release 工作流（打 tag 时发布到 npm）
-│       ├── review-command.yml                 # Review 命令工作流
-│       └── test.yml                           # CI Test 工作流（集成测试）
-├── .gitignore                                 # Git 忽略规则
-├── .lintrc/                                   # 各工具 Lint 配置
-│   ├── docs/
-│   │   └── markdown/
-│   │       └── .markdownlint.json             # Markdown lint 规则
-│   ├── frontend/                              # 前端/TypeScript 相关
-│   │   ├── knip.json                          # Knip 未使用导出检查配置
-│   │   ├── prettier/
-│   │   │   └── .prettierrc                    # Prettier 格式化配置
-│   │   └── typescript/
-│   │       ├── .eslintrc-ts.json              # ESLint TypeScript 规则
-│   │       └── tsconfig-lint.json             # ESLint 专用 tsconfig
-│   ├── general/                               # 通用规范
-│   │   ├── .ls-lint.yml                       # 文件命名规范检查
-│   │   ├── .yamllint.yml                      # YAML lint 规则
-│   │   └── cspell.json                        # 拼写检查词典配置
-│   ├── git/
-│   │   └── .commitlintrc.cjs                  # Commit message 规范
-│   └── security/
-│       └── .gitleaks.toml                     # 密钥泄露扫描规则
-├── .vscode/                                   # VS Code 工作区配置
-│   ├── extensions.json                        # 推荐扩展列表
-│   └── settings.json                          # 工作区设置（格式化/lint 等）
-├── CODE_OF_CONDUCT.md                         # 行为准则
-├── CONTRIBUTING.md                            # 贡献指南
-├── LICENSE                                    # GPL-3.0 许可证
-├── README.md                                  # 本文件
-├── SECURITY.md                                # 安全漏洞披露政策
-├── openapi-ts.config.ts                       # @hey-api/openapi-ts 代码生成配置
-├── package.json                               # 包定义、scripts、依赖声明
-├── scripts/
-│   └── generate-version.js                    # 从 package.json 读取版本号并写入 src/version.ts
-├── src/                                       # 源代码
-│   ├── api/                                   # 高层手写封装（Layer 2）
-│   │   ├── 01-subjects.ts                     # SubjectAPI — 条目（8 个接口）
-│   │   ├── 02-episodes.ts                     # EpisodeAPI — 章节（2 个接口）
-│   │   ├── 03-characters.ts                   # CharacterAPI — 角色（7 个接口）
-│   │   ├── 04-persons.ts                      # PersonAPI — 人物（7 个接口）
-│   │   ├── 05-users.ts                        # UserAPI — 用户（3 个接口）
-│   │   ├── 06-collections.ts                  # CollectionAPI — 收藏（12 个接口）
-│   │   ├── 07-revisions.ts                    # RevisionAPI — 编辑历史（8 个接口）
-│   │   └── 08-indices.ts                      # IndexAPI — 目录（9 个接口）
-│   ├── client.ts                              # createBangumiClient() 工厂函数、ClientResult<T>
-│   └── index.ts                               # 库公共 API 入口
-├── tests/                                     # 测试
-│   ├── integration/                           # 集成测试（需联网访问 api.bgm.tv）
-│   │   ├── 01-subjects.test.ts                # SubjectAPI 集成测试（8 个接口）
-│   │   ├── 02-episodes.test.ts                # EpisodeAPI 集成测试（2 个接口）
-│   │   ├── 03-characters.test.ts              # CharacterAPI 集成测试（7 个接口）
-│   │   ├── 04-persons.test.ts                 # PersonAPI 集成测试（7 个接口）
-│   │   ├── 05-users.test.ts                   # UserAPI 集成测试（3 个接口）
-│   │   ├── 06-collections.test.ts             # CollectionAPI 集成测试（12 个接口）
-│   │   ├── 07-revisions.test.ts               # RevisionAPI 集成测试（8 个接口）
-│   │   └── 08-indices.test.ts                 # IndexAPI 集成测试（9 个接口）
-│   └── tsconfig.json                          # 测试专用 TypeScript 配置
-├── tsconfig.json                              # TypeScript 编译配置（ESM/NodeNext/ES2022）
-├── vitest.config.ts                           # Vitest 测试配置
-└── yarn.lock                                  # 依赖版本锁定文件
-```
 
 ## 开发工作流
 
@@ -133,7 +34,7 @@ yarn typecheck    # 生成 → 仅类型检查，不输出产物
 yarn test         # 生成 → 运行集成测试（需联网访问 api.bgm.tv）
 ```
 
-> 认证相关测试须在 `.env` 中配置 `BGM_TOKEN`。
+> 认证相关测试需通过环境变量 `BGM_TOKEN` 提供 Access Token（`vitest.config.ts` 仅透传 `process.env` 中以 `BGM_` 开头的变量，不会读取 `.env` 文件）。
 
 如果只想单独刷新生成代码（例如官方 OpenAPI YAML 有更新）：
 
@@ -189,14 +90,14 @@ git push origin v<version>
 
 - [Bangumi 番组计划](https://bgm.tv) — 目标 API 所属平台
 - [bangumi/api](https://github.com/bangumi/api) — Bangumi 官方 API 仓库
-- [OpenAPI v0.yaml](https://github.com/bangumi/api/blob/master/open-api/v0.yaml) — 本库底层代码生成所用的 OpenAPI 规范文件
+- [OpenAPI v0.yaml](https://github.com/bangumi/api/blob/master/open-api/v0.yaml) — 本库底层代码生成所用的 OpenAPI 规范文件（锁定 `a7055f2`，2026-07-23）
 - [Bangumi API 文档](https://bangumi.github.io/api/) — 在线 API 文档（Swagger UI）
 - [Bangumi Personal Access Token](https://next.bgm.tv/demo/access-token) — 创建用于认证接口测试的 Access Token（`BGM_TOKEN`）
 
 ### 依赖
 
 - [@hey-api/openapi-ts](https://github.com/hey-api/openapi-ts) — OpenAPI → TypeScript 代码生成器（开发依赖）
-- [@hey-api/client-fetch](https://github.com/hey-api/openapi-ts/tree/main/packages/client-fetch) — 生成代码使用的 Fetch HTTP 客户端（运行时依赖）
+- [@hey-api/client-fetch](https://github.com/hey-api/openapi-ts/tree/main/packages/client-fetch) — 生成代码使用的 Fetch 客户端；其代码由 `@hey-api/openapi-ts` 内联生成到 `src/generated/client` 与 `src/generated/core`，本包不单独安装该依赖
 
 ### 作者
 
