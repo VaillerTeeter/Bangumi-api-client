@@ -14,7 +14,7 @@ import { createBangumiClient } from 'bangumi-api-client';
 // 无需认证的接口
 const bgm = createBangumiClient();
 
-// 需要认证的接口（collectCharacter / uncollectCharacter）
+// 需要认证的接口（collectCharacter / uncollectCharacter，需 `write:collection` scope）
 const bgmAuth = createBangumiClient({ token: 'your-access-token' });
 ```
 
